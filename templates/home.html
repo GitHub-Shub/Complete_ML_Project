@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery Time Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+            <h1>Food Delivery Time Prediction</h1>
+            
+            <div class="mb-3">
+                <label class="form-label">Weather</label>
+                <select class="form-control" name="Weather" required>
+                    <option selected disabled value="">Select the weather</option>
+                    <option value="Clear">Clear</option>
+                    <option value="Rainy">Rainy</option>
+                    <option value="Snowy">Snowy</option>
+                    <option value="Foggy">Foggy</option>
+                    <option value="Windy">Windy</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Traffic Level</label>
+                <select class="form-control" name="Traffic_Level" required>
+                    <option selected disabled value="">Select Traffic Level</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Time of Day</label>
+                <select class="form-control" name="Time_of_Day" required>
+                    <option selected disabled value="">Select Time of the Day</option>
+                    <option value="Evening">Evening</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Morning">Morning</option>
+                    <option value="Night">Night</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Vehicle Type</label>
+                <select class="form-control" name="Vehicle_Type" required>
+                    <option selected disabled value="">Select Vehicle Type</option>
+                    <option value="Scooter">Scooter</option>
+                    <option value="Bike">Bike</option>
+                    <option value="Car">Car</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Preparation Time (min)</label>
+                <input class="form-control" type="number" name="Preparation_Time_min" min="0" max="100" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Courier Experience (yrs)</label>
+                <input class="form-control" type="number" name="Courier_Experience_yrs" min="0" max="10" step="0.1" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Distance (km)</label>
+                <input class="form-control" type="number" name="Distance_km" min="0" max="50" step="any" required>
+            </div>
+            
+            <div class="mb-3">
+                <input class="btn-primary" type="submit" value="Predict Delivery Time">
+            </div>
+        </form>
+        
+        {% if results %}
+        <div class="result-box">
+            <h2>Prediction Result(in mins)</h2>
+            <p>{{ results }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
